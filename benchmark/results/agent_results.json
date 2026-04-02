@@ -1,0 +1,48 @@
+[
+  {
+    "task_id": "task_01",
+    "correct": true,
+    "cells": 1336,
+    "ffs": 240,
+    "wires": 1596,
+    "delta_cells_pct": -11.87,
+    "delta_ffs_pct": -21.05,
+    "delta_wires_pct": -17.26
+  },
+  {
+    "task_id": "task_02",
+    "correct": true,
+    "cells": 6657,
+    "ffs": 133,
+    "wires": 6922,
+    "delta_cells_pct": -6.86,
+    "delta_ffs_pct": 0.0,
+    "delta_wires_pct": -4.51
+  },
+  {
+    "task_id": "task_03",
+    "correct": true,
+    "cells": 1859,
+    "ffs": 143,
+    "wires": 1965,
+    "delta_cells_pct": 10.59,
+    "delta_ffs_pct": -28.5,
+    "delta_wires_pct": 10.33
+  },
+  {
+    "task_id": "task_04",
+    "correct": true,
+    "cells": 9517,
+    "ffs": 1614,
+    "wires": 10051,
+    "delta_cells_pct": -0.89,
+    "delta_ffs_pct": 0.0,
+    "delta_wires_pct": -0.84
+  },
+  {
+    "task_id": "task_05",
+    "correct": false,
+    "stage": "simulate",
+    "sim_output": "FAIL [counter]: counter = 0 (should be > 0)\nFAIL [add]: 42 + 17 = 0, expected 59\nFAIL [sub]: 42 - 17 = 0, expected 25\nPASS [and]: 42 & 17 = 0\n\nSOME TESTS FAILED"
+  }
+]

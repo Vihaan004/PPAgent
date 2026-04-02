@@ -1,0 +1,6 @@
+{
+    "top_module": "picorv32_pcpi_fast_mul",
+    "cells": 7147,
+    "ffs": 133,
+    "wires": 7249
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "task_id": "task_01",
+    "correct": true,
+    "cells": 1325,
+    "ffs": 240,
+    "wires": 1426,
+    "delta_cells_pct": -12.6,
+    "delta_ffs_pct": -21.05,
+    "delta_wires_pct": -26.08
+  },
+  {
+    "task_id": "task_03",
+    "correct": true,
+    "cells": 1698,
+    "ffs": 143,
+    "wires": 1862,
+    "delta_cells_pct": 1.01,
+    "delta_ffs_pct": -28.5,
+    "delta_wires_pct": 4.55
+  },
+  {
+    "task_id": "task_05",
+    "correct": true,
+    "cells": 8350,
+    "ffs": 1472,
+    "wires": 8888,
+    "delta_cells_pct": -13.04,
+    "delta_ffs_pct": -8.8,
+    "delta_wires_pct": -12.31
+  }
+]

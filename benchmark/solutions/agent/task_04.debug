@@ -1,0 +1,61 @@
+					mem_do_rinst <= mem_do_prefetch && !alu_wait_2;
+					alu_wait <= alu_wait_2;
+				end else
+				if (is_beq_bne_blt_bge_bltu_bgeu) begin
+					latched_rd <= 0;
+					latched_store <= TWO_CYCLE_COMPARE ? alu_out_0_q : alu_out_0;
+					latched_branch <= TWO_CYCLE_COMPARE ? alu_out_0_q : alu_out_0;
+					if (mem_done)
+						cpu_state <= cpu_state_fetch;
+					if (TWO_CYCLE_COMPARE ? alu_out_0_q : alu_out_0) begin
+						decoder_trigger <= 0;
+						set_mem_do_rinst = 1;
+					end
+				end else begin
+					latched_branch <= instr_jalr;
+					latched_store <= 1;
+					latched_stalu <= 1;
+					cpu_state <= cpu_state_fetch;
+				end
+			end
+
+			cpu_state_shift: begin
+				latched_store <= 1;
+				if (reg_sh == 0) begin
+					reg_out <= reg_op1;
+					mem_do_rinst <= mem_do_prefetch;
+					cpu_state <= cpu_state_fetch;
+				end else begin
+					// Simplified shifter: always shift by 1 bit per cycle to reduce combinational
+					// shifter complexity and area. This removes the TWO_STAGE_SHIFT path.
+					(* parallel_case, full_case *)
+					case (1'b1)
+						instr_slli || instr_sll: reg_op1 <= reg_op1 << 1;
+						instr_srli || instr_srl: reg_op1 <= reg_op1 >> 1;
+						instr_srai || instr_sra: reg_op1 <= (reg_op1) >>> 1;
+					endcase
+					reg_sh <= reg_sh - 1;
+				end
+			end
+			cpu_state_shift: begin
+				latched_store <= 1;
+				if (reg_sh == 0) begin
+					reg_out <= reg_op1;
+					mem_do_rinst <= mem_do_prefetch;
+					cpu_state <= cpu_state_fetch;
+				end else if (TWO_STAGE_SHIFT && reg_sh >= 4) begin
+					(* parallel_case, full_case *)
+					case (1'b1)
+						instr_slli || instr_sll: reg_op1 <= reg_op1 << 4;
+						instr_srli || instr_srl: reg_op1 <= reg_op1 >> 4;
+						instr_srai || instr_sra: reg_op1 <= $signed(reg_op1) >>> 4;
+					endcase
+					reg_sh <= reg_sh - 4;
+				end else begin
+					(* parallel_case, full_case *)
+					case (1'b1)
+						instr_slli || instr_sll: reg_op1 <= reg_op1 << 1;
+						instr_srli || instr_srl: reg_op1 <= reg_op1 >> 1;
+						instr_srai || instr_sra: reg_op1 <= $signed(reg_op1) >>> 1;
+					endcase
+					reg_sh <= reg_sh - 1;
