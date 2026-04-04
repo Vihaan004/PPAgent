@@ -62,10 +62,6 @@ graph TD
     H --> I["compute_deltas"]
     I --> J["delta_% = solution - baseline / baseline × 100"]
     J --> K["Output: cells, FFs, wires deltas"]
-    
-    style A fill:#e1f5ff
-    style E fill:#ffcdd2
-    style K fill:#c8e6c9
 ```
 
 
